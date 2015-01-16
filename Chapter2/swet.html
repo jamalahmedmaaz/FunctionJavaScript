@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <script type='text/javascript' src='http://code.jquery.com/jquery-git.js'></script>
+    <script type='text/javascript' src="http://documentcloud.github.com/underscore/underscore-min.js"></script>
+    <script>
+        var items = [
+            {name: "Nick"},
+            {name: "Lee"},
+            {name: "Jenny"},
+            {name: "Julie"},
+            {name: "Dennis"},
+            {name: "Shawn"},
+            {name: "Justin"},
+            {name: "Scott"},
+            {name: "John"},
+            {name: "Sherell"},
+            {name: "Janie"},
+            {name: "Graham"},
+            {name: "Erica"}
+        ]
+
+        $("#underscore").html(_.map(items), function (a) {
+            return a.name
+        });
+
+        var tableTemplate = $("#table-data").html(),
+                divTemplate = $("#div-data").html();
+
+        $("table.outer tbody").html(_.template(tableTemplate, {items: items}));
+        $("div.outer p").before(_.template(divTemplate, {items: items}));
+
+    </script>
+    <title></title>
+</head>
+<body>
+<div id="underscore">
+
+
+</div>
+
+<table class="outer">
+    <thead>
+    <tr>
+        <th>Id</th>
+        <th>Name</th>
+    </tr>
+    </thead>
+    <tbody>
+    </tbody>
+</table>
+
+
+<div class="outer">
+
+    <div class="th">Id</div>
+    <div class="th">Name</div>
+
+    <p>&nbsp;</p>
+
+</div>
+
+<script type="text/html" id='table-data'>
+    <% _.each(items,function(item,key,list){ %>
+    <tr>
+        <td><%= key %></td>
+        <td><%= item.name %></td>
+    </tr>
+    <% }) %>
+</script>
+
+<script type="text/html" id='div-data'>
+
+    <% _.each(items,function(item,key,list){ %>
+    <div><%= key %></div>
+    <div><%= item.name %></div>
+    <% }) %>
+
+</script>
+
+</body>
+</html>
